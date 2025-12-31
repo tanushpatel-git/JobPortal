@@ -3,7 +3,6 @@ import { gsap } from 'gsap';
 import ArrowOutwardIcon from '@mui/icons-material/ArrowOutward';
 import {Link} from 'react-router-dom'
 
-
 const NavBar = ({
                      items,
                      className = '',
@@ -130,7 +129,7 @@ const NavBar = ({
 
     return (
         <div
-            className={`card-nav-container fixed left-1/2 -translate-x-1/2 w-[90%] max-w-[80vw] z-[99] top-[1.2em] md:top-[2em] ${className}`}
+            className={`card-nav-container fixed left-1/2 -translate-x-1/2 w-[90%] max-w-[80vw] z-10 top-[1.2em] md:top-[2em] ${className}`}
         >
             <nav
                 ref={navRef}

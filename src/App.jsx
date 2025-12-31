@@ -10,6 +10,8 @@ import Login from './Pages/Login.jsx'
 import ApplyJobPage from "./Pages/ApllyJobPage.jsx";
 import About from "./Pages/About.jsx";
 import Contact from "./Pages/Contact.jsx";
+import ErrorPage from "./Pages/ErrorPage.jsx";
+import JobListPage from "./Pages/JobListPage.jsx";
 
 
 const App = () => {
@@ -27,7 +29,7 @@ const App = () => {
         links: [{label: "Saved Jobs", ariaLabel: "saved Jobs", href: "/saveJobs"}, {
             label: "My Application", ariaLabel: "my application", href: "/myApplication"
         },{
-            label: "Apply Jobs", ariaLabel: "Apply job", href: "/applyJob"
+            label: "Job List", ariaLabel: "Job List", href: "/JobList"
         }]
     }, {
         label: "Login",
@@ -51,12 +53,14 @@ const App = () => {
                 <Route path="/" element={<Home/>}/>
                 <Route path="/about" element={<About/>}/>
                 <Route path="contact" element={<Contact/>}/>
+                <Route path="/JobList" element={<JobListPage/>} />
                 <Route path="/applyJob" element={<ApplyJobPage/>}/>
                 <Route path="/jobDetailPage" element={<JobDetailPage/>}/>
                 <Route path="/saveJobs" element={<SaveJobPage/>}/>
                 <Route path="/myApplication" element={<MyApllicationPage/>}/>
                 <Route path="/signUp" element={<SignUp/>}/>
                 <Route path="/login" element={<Login/>}/>
+                <Route path="*" element={<ErrorPage/>}/>
             </Routes>
         </div>)
 }

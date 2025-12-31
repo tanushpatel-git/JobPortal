@@ -1,6 +1,21 @@
+import {toast, ToastContainer} from "react-toastify";
+
 export default function JobInfoCard({jobs}) {
+
+    let savedJobData = JSON.parse(localStorage.getItem("savedJobData")) || [];
+    const handleSavedJob = (data) => {
+        const findSameJob = savedJobData.find((job) => job.id === data.id);
+        if (!findSameJob) {
+            savedJobData.push(data);
+            localStorage.setItem("savedJobData", JSON.stringify(savedJobData));
+            toast.success("Job saved successfully.");
+        }else{
+            toast.warning("Job already exists!");
+        }
+    }
     return (
         <div className="min-h-screen p-6 relative top-0 left-0">
+            <ToastContainer position="bottom-left" />
             <div
                 className=" grid lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 gap-2 justify-center items-center w-full">
                 {jobs.map((job, index) => (<div key={index}>
@@ -34,10 +49,11 @@ export default function JobInfoCard({jobs}) {
                         <div className="flex gap-3 pt-2">
                             <button
                                 className="rounded-2xl px-4 py-2 bg-gray-900 text-white font-medium hover:bg-gray-800 transition w-full">
-                                Job Details
+                                View Details
                             </button>
                             <button
-                                className="rounded-2xl px-4 py-2 border border-gray-300 font-medium hover:bg-gray-100 transition w-full">
+                                onClick={()=>handleSavedJob(job)}
+                                className="rounded-2xl active:scale-95 px-4 py-2 border border-gray-300 font-medium hover:bg-gray-100 transition w-full">
                                 Save Job
                             </button>
                         </div>
