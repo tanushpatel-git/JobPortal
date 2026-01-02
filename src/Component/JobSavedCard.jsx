@@ -1,4 +1,7 @@
+import {useNavigate} from "react-router-dom";
+
 export default function SavedJobCard(props) {
+    const navigate = useNavigate();
     return (
         <div className="max-w-sm w-full bg-white border border-gray-200 rounded-2xl shadow-sm hover:shadow-md transition p-5 space-y-4">
             <div className="flex items-start justify-between gap-3">
@@ -34,7 +37,9 @@ export default function SavedJobCard(props) {
                         className="px-3 py-2 rounded-xl border border-gray-200 text-sm hover:bg-gray-50">
                         Remove
                     </button>
-                    <button className="px-3 py-2 rounded-xl text-sm bg-indigo-600 text-white hover:bg-indigo-700">
+                    <button
+                        onClick={()=>navigate(`/jobDetailPage/${props.job.id}`)}
+                        className="px-3 py-2 rounded-xl text-sm bg-black text-white hover:bg-gray-950">
                         View Details
                     </button>
                 </div>

@@ -1,8 +1,10 @@
 import {toast, ToastContainer} from "react-toastify";
+import {useNavigate} from "react-router-dom";
 
 export default function JobInfoCard({jobs}) {
 
     let savedJobData = JSON.parse(localStorage.getItem("savedJobData")) || [];
+    const navigate = useNavigate();
     const handleSavedJob = (data) => {
         const findSameJob = savedJobData.find((job) => job.id === data.id);
         if (!findSameJob) {
@@ -48,6 +50,7 @@ export default function JobInfoCard({jobs}) {
 
                         <div className="flex gap-3 pt-2">
                             <button
+                                onClick={()=>navigate(`/jobDetailPage/${job.id}`)}
                                 className="rounded-2xl px-4 py-2 bg-gray-900 text-white font-medium hover:bg-gray-800 transition w-full">
                                 View Details
                             </button>
