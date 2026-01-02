@@ -1,12 +1,14 @@
-import { useState } from "react";
+import {useEffect, useState} from "react";
 import { motion } from "framer-motion";
 import {form} from "framer-motion/m";
 import {Link, useNavigate} from 'react-router-dom'
-import {toast} from "react-toastify";
+import {toast, ToastContainer} from "react-toastify";
+import {fetchJobs} from "../Services/jobservice.js";
 
 
 export default function Login() {
     const navigate = useNavigate();
+    const loginData = JSON.parse(localStorage.getItem("loginData"));
     const signUpData = JSON.parse(localStorage.getItem("signUpData")) || [];
     const [formData, setFormData] = useState({
         email: "",
@@ -20,14 +22,35 @@ export default function Login() {
             toast.warn("First you have to sign up!");
             navigate("/signUp");
         }else{
-            //code pending.
+            let tempData = false;
+            signUpData.forEach((item) => {
+                if(item.email === formData.email){
+                    if(item.password === formData.password){
+                        tempData = true;
+                    }
+                }
+            })
+            if(tempData){
+                toast.success("Passwords match!");
+                localStorage.setItem("loginData", JSON.stringify(formData));
+            }else{
+                toast.error("Incorrect email or password!");
+            }
         }
         setLoading(true);
-        setTimeout(() => setLoading(false), 1200);
+        setTimeout(() => {
+            navigate("/");
+            setLoading(false);
+        }, 1200);
     };
+
+    useEffect(() => {
+        fetchJobs()
+    },[])
 
     return (
         <div className="min-h-screen grid place-items-center bg-gradient-to-br from-slate-50 to-slate-100 p-6">
+            <ToastContainer/>
             <motion.div
                 initial={{ opacity: 0, y: 24 }}
                 animate={{ opacity: 1, y: 0 }}

@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useEffect, useState} from 'react'
 import JobSavedCard from '../Component/JobSavedCard.jsx'
 
 
@@ -8,10 +8,12 @@ const SaveJobPage = () => {
     const [savedJob, setSavedJob] = useState(savedJobData);
 
     const handleRemove = (id) => {
-        const updatedData = savedJobData.filter(job => job.id !== id);
+        const updatedData = savedJob.filter(job => job.id !== id);
         setSavedJob(updatedData);
     }
-    localStorage.setItem("savedJobData", JSON.stringify(savedJob));
+    useEffect(()=>{
+        localStorage.setItem("savedJobData", JSON.stringify(savedJob));
+    },[savedJob])
     return (
         <div className="relative w-full h-screen top-0 left-0">
             <div className="absolute top-[13vh] flex w-full justify-center items-center">

@@ -25,8 +25,8 @@ export default function JobInfoCard({jobs}) {
                         className="bg-white shadow-xl rounded-2xl max-w-md w-full p-6 space-y-5 border border-gray-100">
                         <div>
                             <h1 className="text-xl font-semibold text-gray-900">{job.title}</h1>
-                            <p className="text-gray-600 mt-1">{job.company}</p>
-                            <p className="text-sm text-gray-500 mt-1">{job.location} • {job.type}</p>
+                            <p className="text-gray-600 mt-1">{job.company.display_name}</p>
+                            <p className="text-sm text-gray-500 mt-1">{job.location.display_name}</p>
                         </div>
 
                         <div className="rounded-2xl bg-gray-100 p-4">
@@ -34,18 +34,6 @@ export default function JobInfoCard({jobs}) {
                                 We are seeking a skilled {job.title} to help build scalable,
                                 reliable systems powering millions of users.
                             </p>
-                        </div>
-
-                        <div className="grid grid-cols-1 gap-3">
-                            <div className="flex justify-between text-sm text-gray-700">
-                                <span className="font-medium">Experience:</span>
-                                <span>{job.experience}</span>
-                            </div>
-
-                            <div className="flex justify-between text-sm text-gray-700">
-                                <span className="font-medium">Role Type:</span>
-                                <span>{job.type}</span>
-                            </div>
                         </div>
 
                         <div className="flex gap-3 pt-2">

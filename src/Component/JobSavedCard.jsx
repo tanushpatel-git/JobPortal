@@ -7,7 +7,7 @@ export default function SavedJobCard(props) {
             <div className="flex items-start justify-between gap-3">
                 <div>
                     <h2 className="text-lg font-semibold leading-tight">{props.job.title}</h2>
-                    <p className="text-sm text-gray-500 mt-1">{props.job.company}</p>
+                    <p className="text-sm text-gray-500 mt-1">{props.job.company.display_name}</p>
                 </div>
                 <span className="px-3 py-1 rounded-xl text-xs font-medium bg-indigo-50 text-indigo-600">
           Saved
@@ -17,15 +17,7 @@ export default function SavedJobCard(props) {
             <div className="space-y-2 text-sm text-gray-600">
                 <div className="flex justify-between">
                     <span className="font-medium text-gray-500">Location</span>
-                    <span>{props.job.location}</span>
-                </div>
-                <div className="flex justify-between">
-                    <span className="font-medium text-gray-500">Experience</span>
-                    <span>{props.job.experience}</span>
-                </div>
-                <div className="flex justify-between">
-                    <span className="font-medium text-gray-500">Type</span>
-                    <span>{props.job.type}</span>
+                    <span>{props.job.location.display_name}</span>
                 </div>
             </div>
 

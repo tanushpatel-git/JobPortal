@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import {Link} from 'react-router-dom'
+import {toast} from "react-toastify";
 
 
 export default function SignupPage() {
@@ -24,7 +25,10 @@ export default function SignupPage() {
             localStorage.setItem("signUpData", JSON.stringify(signUpData));
         }
         setLoading(true);
-        setTimeout(() => setLoading(false), 1200);
+        setTimeout(() => {
+            setLoading(false)
+            toast.success("Passwords account is created successfully!");
+        }, 1200);
     };
 
     return (
