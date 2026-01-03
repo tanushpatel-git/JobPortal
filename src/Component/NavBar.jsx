@@ -1,7 +1,7 @@
 import { useLayoutEffect, useRef, useState } from 'react';
 import { gsap } from 'gsap';
 import ArrowOutwardIcon from '@mui/icons-material/ArrowOutward';
-import {Link} from 'react-router-dom'
+import {Link, useNavigate} from 'react-router-dom'
 
 const NavBar = ({
                      items,
@@ -10,6 +10,7 @@ const NavBar = ({
                      baseColor = '#fff',
                      menuColor,
                  }) => {
+    const navigate = useNavigate();
     const [isHamburgerOpen, setIsHamburgerOpen] = useState(false);
     const [isExpanded, setIsExpanded] = useState(false);
     const navRef = useRef(null);
@@ -127,6 +128,15 @@ const NavBar = ({
         if (el) cardsRef.current[i] = el;
     };
 
+    let loginData = JSON.parse(localStorage.getItem('loginData')) || null;
+
+    const handleLoginClick = () => {
+        if(loginData) {
+            localStorage.removeItem('loginData');
+        }
+        navigate('/login');
+    }
+
     return (
         <div
             className={`card-nav-container fixed left-1/2 -translate-x-1/2 w-[90%] max-w-[80vw] z-10 top-[1.2em] md:top-[2em] ${className}`}
@@ -162,10 +172,10 @@ const NavBar = ({
                     </div>
 
                     <button
-                        type="button"
+                        onClick={handleLoginClick}
                         className="card-nav-cta-button bg-[#DDEB9D] hidden md:inline-flex border-0 rounded-[calc(0.75rem-0.2rem)] px-4 items-center h-full font-medium cursor-pointer transition-colors duration-300"
                     >
-                        Login
+                        {loginData?"Log out":"Login"}
                     </button>
                 </div>
 

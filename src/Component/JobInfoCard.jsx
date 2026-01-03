@@ -38,7 +38,10 @@ export default function JobInfoCard({jobs}) {
 
                         <div className="flex gap-3 pt-2">
                             <button
-                                onClick={()=>navigate(`/jobDetailPage/${job.id}`)}
+                                onClick={()=> {
+                                    localStorage.setItem("detailOfClickedJob", JSON.stringify(job));
+                                    navigate(`/jobDetailPage/${job.id}`)
+                                }}
                                 className="rounded-2xl px-4 py-2 bg-gray-900 text-white font-medium hover:bg-gray-800 transition w-full">
                                 View Details
                             </button>

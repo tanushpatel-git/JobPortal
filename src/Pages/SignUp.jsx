@@ -1,11 +1,10 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
-import {Link} from 'react-router-dom'
-import {toast} from "react-toastify";
-
+import {Link, useNavigate} from 'react-router-dom'
 
 export default function SignupPage() {
     let signUpData = JSON.parse(localStorage.getItem("signUpData")) || [];
+    const navigate = useNavigate();
     const [formData, setFormData] = useState({
         email: "",
         password: "",
@@ -17,19 +16,52 @@ export default function SignupPage() {
 
     const handleSubmit = (e) => {
         e.preventDefault();
+
+        const nameRegex = /^[A-Za-z ]{2,}$/;
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$/;
+
+
+        // Name validation
+        if (!nameRegex.test(formData.name)) {
+            setError("Enter a valid full name (letters only, at least 2 characters)");
+            return;
+        }
+
+        // Email validation
+        if (!emailRegex.test(formData.email)) {
+            setError("Enter a valid email address");
+            return;
+        }
+
+        // Password validation
+        if (!passwordRegex.test(formData.password)) {
+            setError(
+                "Password must be at least 8 characters and include uppercase, lowercase, and a number"
+            );
+            return;
+        }
+
+        // Confirm password validation
         if (formData.password_confirmation !== formData.password) {
             setError("Passwords do not match");
             return;
-        }else{
-            signUpData.push(formData);
-            localStorage.setItem("signUpData", JSON.stringify(signUpData));
         }
+
+        // Clear errors
+        setError("");
+
+        // Save user
+        signUpData.push(formData);
+        localStorage.setItem("signUpData", JSON.stringify(signUpData));
+        localStorage.setItem("loginData", JSON.stringify(signUpData));
+        navigate("/");
         setLoading(true);
         setTimeout(() => {
-            setLoading(false)
-            toast.success("Passwords account is created successfully!");
+            setLoading(false);
         }, 1200);
     };
+
 
     return (
         <div className="min-h-screen grid place-items-center bg-gradient-to-br from-slate-50 to-slate-100 p-6">

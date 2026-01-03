@@ -29,7 +29,7 @@ const App = () => {
         links: [{label: "Saved Jobs", ariaLabel: "saved Jobs", href: "/saveJobs"}, {
             label: "My Application", ariaLabel: "my application", href: "/myApplication"
         },{
-            label: "Job List", ariaLabel: "Job List", href: "/JobList"
+            label: "Browse Jobs", ariaLabel: "Job List", href: "/JobList"
         }]
     }, {
         label: "Login",

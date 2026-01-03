@@ -1,6 +1,5 @@
 import React, {useEffect, useState} from 'react'
 import JobInfoCard from "../Component/JobInfoCard.jsx";
-import jobData from "../Data/jobData.js";
 import {fetchJobs} from "../Services/jobservice.js";
 import {CircularProgress} from "@mui/material";
 
@@ -26,7 +25,7 @@ const JobListPage = () => {
                         type="text"
                         value={search}
                         onChange={(e) => setSearch(e.target.value)}
-                        placeholder="Search title, role or location that prefer as per your requirement."
+                        placeholder="Search role that prefer as per your requirement."
                     />
                 </div>
                 <div className="h-[79vh] overflow-auto">

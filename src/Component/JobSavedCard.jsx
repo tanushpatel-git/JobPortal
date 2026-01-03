@@ -30,7 +30,10 @@ export default function SavedJobCard(props) {
                         Remove
                     </button>
                     <button
-                        onClick={()=>navigate(`/jobDetailPage/${props.job.id}`)}
+                        onClick={()=> {
+                            localStorage.setItem("detailOfClickedJob", JSON.stringify(props.job));
+                            navigate(`/jobDetailPage/${props.job.id}`)
+                        }}
                         className="px-3 py-2 rounded-xl text-sm bg-black text-white hover:bg-gray-950">
                         View Details
                     </button>

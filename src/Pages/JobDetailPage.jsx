@@ -1,28 +1,22 @@
 import React, {useEffect, useState} from "react";
-import {useNavigate, useParams} from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 import {motion} from "framer-motion";
-import { MapPin, Building2, LucideCross } from "lucide-react";
-import {fetchJobs} from "../Services/jobservice.js";
-import {data} from "framer-motion/m";
-import jobs from "../Data/jobData.js";
+import { MapPin, Building2, LucideCross ,IndianRupee} from "lucide-react";
+import {CircularProgress} from "@mui/material";
 
 const JobDetailPage = () => {
-    const { id } = useParams();
     const navigate = useNavigate();
     const [job, setJob] = useState([]);
     const [loading, setLoading] = useState(true)
     useEffect(() => {
-        const load = async () => {
-            const res = await fetchJobs();
-            const selected = res.find(j => j.id === Number(id));
-            setJob(selected);
-        };
-        load();
+        let data = JSON.parse(localStorage.getItem("detailOfClickedJob"));
+        setJob(data);
+        setLoading(false)
     }, []);
 
     return (
         <div className="min-h-screen bg-white text-gray-900 flex justify-center items-start py-12 px-4">
-            {(!job) ? <h1 className="absolute top-[13vh] text-6xl text-black">Id not match</h1> : <div className="w-[80%] mx-auto space-y-8">
+            {loading ? <CircularProgress color="primary" className="relative top-[35vh] left-0"/> : <div className="w-[80%] relative top-[12vh] mx-auto space-y-8">
                 <header className="flex items-center justify-between">
                 <h1 className="text-3xl font-bold tracking-tight text-gray-900">
                 Job Listings
@@ -52,6 +46,9 @@ const JobDetailPage = () => {
                     <div className="flex items-center gap-2 text-gray-600">
                         <MapPin className="w-4 h-4" /> {job?.location?.display_name}
                     </div>
+                    <div className="flex items-center gap-2 text-gray-600">
+                        <IndianRupee className="w-4 h-4" /> {job?.salary_min ? `${job?.salary_min}-${job?.salary_max?job?.salary_max:"+"}` : "N/A"}
+                    </div>
                 </div>
 
                 <p className="text-sm leading-relaxed text-gray-700">
@@ -59,7 +56,9 @@ const JobDetailPage = () => {
                 </p>
 
                 <div className="flex items-center justify-between pt-2">
-                    <button className="rounded-xl px-4 py-2 bg-black text-white hover:bg-gray-800">
+                    <button
+                        onClick={() => navigate("/applyJob")}
+                        className="rounded-xl px-4 py-2 bg-black text-white hover:bg-gray-800">
                         Apply
                     </button>
                 </div>
