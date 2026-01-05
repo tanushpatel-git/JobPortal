@@ -2,7 +2,9 @@ import React from 'react'
 
 const MyApllicationPage = () => {
     return (
-        <div>MyApllicationPage</div>
+        <div>
+            "Hello, World!"
+        </div>
     )
 }
 export default MyApllicationPage
