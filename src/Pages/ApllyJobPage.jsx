@@ -52,6 +52,8 @@ export function Textarea(props) {
 
 export default function ApllyJobPage() {
     const [form, setForm] = useState({ name: "", email: "", role: "", resume: "", message: "" });
+    let applyInfoData = JSON.parse(localStorage.getItem("applyInfoData")) || [];
+    let detailOfClickedJob = JSON.parse(localStorage.getItem("detailOfClickedJob"));
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -60,7 +62,8 @@ export default function ApllyJobPage() {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        alert("Application submitted! (Demo)");
+        applyInfoData.push(detailOfClickedJob);
+        localStorage.setItem("applyInfoData", JSON.stringify(applyInfoData));
     };
 
     return (
