@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
+import {toast, ToastContainer} from "react-toastify";
 
 export function Card({ children }) {
     return (
@@ -54,6 +55,7 @@ export default function ApllyJobPage() {
     const [form, setForm] = useState({ name: "", email: "", role: "", resume: "", message: "" });
     let applyInfoData = JSON.parse(localStorage.getItem("applyInfoData")) || [];
     let detailOfClickedJob = JSON.parse(localStorage.getItem("detailOfClickedJob"));
+    let date = new Date();
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -62,12 +64,21 @@ export default function ApllyJobPage() {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        applyInfoData.push(detailOfClickedJob);
+        let findApplyJob = applyInfoData.find((job)=>job.id === detailOfClickedJob.id);
+        if (findApplyJob) {
+            toast.warn("You already apply in this job.")
+        }else{
+            toast.success("You successfully apply in this job.")
+            const currentTime = `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`;
+            detailOfClickedJob["time"]=currentTime;
+            applyInfoData.push(detailOfClickedJob);
+        }
         localStorage.setItem("applyInfoData", JSON.stringify(applyInfoData));
     };
 
     return (
         <div className="min-h-screen bg-white text-black flex items-center justify-center p-6">
+            <ToastContainer/>
             <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
