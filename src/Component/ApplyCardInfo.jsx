@@ -36,21 +36,8 @@ export default function ApplyCardInfo({
                             </div>
                         </div>
                     </div>
-                    <button onClick={onView} className="px-4 py-2 text-sm font-medium rounded-full bg-gray-900 text-white hover:bg-gray-800">View</button>
                 </div>
             </div>
         </motion.div>
     );
 }
-
-
-// jobs.map(job => (
-//   <AppliedJobCard
-//     key={job.id}
-//     companyName={job.company}
-//     companyRole={job.role}
-//     jobType={job.type}
-//     appliedAt={job.appliedAt}
-//     onView={() => console.log(job.id)}
-//   />
-// ))
