@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import {toast, ToastContainer} from "react-toastify";
+import {useNavigate} from "react-router-dom";
 
 export function Card({ children }) {
     return (
@@ -56,6 +57,7 @@ export default function ApllyJobPage() {
     let applyInfoData = JSON.parse(localStorage.getItem("applyInfoData")) || [];
     let detailOfClickedJob = JSON.parse(localStorage.getItem("detailOfClickedJob"));
     let date = new Date();
+    const navigate = useNavigate();
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -72,8 +74,12 @@ export default function ApllyJobPage() {
             const currentTime = `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`;
             detailOfClickedJob["time"]=currentTime;
             applyInfoData.push(detailOfClickedJob);
+            setTimeout(() => {
+                toast.success("Your job has been Apply successfully.");
+            },1000)
         }
         localStorage.setItem("applyInfoData", JSON.stringify(applyInfoData));
+        navigate(-1);
     };
 
     return (

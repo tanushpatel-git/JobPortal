@@ -6,7 +6,6 @@ export default function ApplyCardInfo({
                                            companyRole,
                                            jobType,
                                            appliedAt,
-                                           onView,
                                        }) {
     return (
         <motion.div
