@@ -1,17 +1,18 @@
 import React from 'react'
 import NavBar from "./Component/NavBar.jsx";
-import {Routes, Route} from 'react-router-dom'
-import Home from './Pages/Home.jsx'
+import {Route, Routes} from "react-router-dom";
+import SignUp from "./Pages/SignUp.jsx";
+import Login from "./Pages/Login.jsx";
+import Home from "./Pages/Home.jsx";
+import About from "./Pages/About.jsx";
+import Contact from "./Pages/Contact.jsx";
+import JobListPage from "./Pages/JobListPage.jsx";
+import ApplyJobPage from "./Pages/ApllyJobPage.jsx";
 import JobDetailPage from "./Pages/JobDetailPage.jsx";
 import SaveJobPage from "./Pages/SaveJobPage.jsx";
 import MyApllicationPage from "./Pages/MyApllicationPage.jsx";
-import SignUp from "./Pages/SignUp.jsx";
-import Login from './Pages/Login.jsx'
-import ApplyJobPage from "./Pages/ApllyJobPage.jsx";
-import About from "./Pages/About.jsx";
-import Contact from "./Pages/Contact.jsx";
 import ErrorPage from "./Pages/ErrorPage.jsx";
-import JobListPage from "./Pages/JobListPage.jsx";
+import ProtectedRoute from "./Authentication/ProtectedRoute.jsx";
 
 
 const App = () => {
@@ -31,14 +32,7 @@ const App = () => {
         },{
             label: "Browse Jobs", ariaLabel: "Job List", href: "/JobList"
         }]
-    }, {
-        label: "Login",
-        bgColor: "#d3e76b",
-        textColor: "#000",
-        links: [{label: "Login", ariaLabel: "Login", href: "/login"}, {
-            label: "SignUp", ariaLabel: "SignUp", href: "/signUp"
-        },]
-    },];
+    }];
 
     return (<div>
             <NavBar
@@ -49,19 +43,19 @@ const App = () => {
                 buttonTextColor="#fff"
                 ease="power3.out"
             />
-            <Routes>
-                <Route path="/" element={<Home/>}/>
-                <Route path="/about" element={<About/>}/>
-                <Route path="contact" element={<Contact/>}/>
-                <Route path="/JobList" element={<JobListPage/>} />
-                <Route path="/applyJob" element={<ApplyJobPage/>}/>
-                <Route path="/jobDetailPage/:id" element={<JobDetailPage/>}/>
-                <Route path="/saveJobs" element={<SaveJobPage/>}/>
-                <Route path="/myApplication" element={<MyApllicationPage/>}/>
-                <Route path="/signUp" element={<SignUp/>}/>
-                <Route path="/login" element={<Login/>}/>
-                <Route path="*" element={<ErrorPage/>}/>
-            </Routes>
+        <Routes>
+            <Route path="/signUp" element={<SignUp/>}/>
+            <Route path="/login" element={<Login/>}/>
+            <Route path="/" element={<ProtectedRoute><Home/></ProtectedRoute>}/>
+            <Route path="/about" element={<About/>}/>
+            <Route path="contact" element={<Contact/>}/>
+            <Route path="/JobList" element={<ProtectedRoute><JobListPage/></ProtectedRoute>}/>
+            <Route path="/applyJob" element={<ProtectedRoute><ApplyJobPage/></ProtectedRoute>}/>
+            <Route path="/jobDetailPage/:id" element={<ProtectedRoute><JobDetailPage/></ProtectedRoute>}/>
+            <Route path="/saveJobs" element={<ProtectedRoute><SaveJobPage/></ProtectedRoute>}/>
+            <Route path="/myApplication" element={<ProtectedRoute><MyApllicationPage/></ProtectedRoute>}/>
+            <Route path="*" element={<ErrorPage/>}/>
+        </Routes>
         </div>)
 }
 export default App
